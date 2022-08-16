@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.1">
+    <persistence-unit name="practice">
+        <class>com.example.demo.model.board</class>
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="org.mariadb.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.user" value="rowonss"/>
+            <property name="javax.persistence.jdbc.password" value="rlak1k2k3!"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mariadb://server.rubisco.kro.kr:3306/rowonss"/>
+
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.use_sql_comments" value="false"/>
+            <property name="hibernate.id.new_generator_mappings" value="false"/>
+            <property name="hibernate.hbm2ddl.auto" value="validate"/>
+        </properties>
+    </persistence-unit>
+</persistence>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="content-type" content="text/html" charset="UTF-8">
+    <title>게시글 목록</title>
+    <style>
+        .asd {
+            background-color: #52909c;
+            text-align: center;
+            font-size: 15px;
+            width: 1200px;
+        }
+
+        .asd > td {
+            border-radius: 5px;
+            color: aliceblue;
+            padding: 5px;
+        }
+
+        .zxc {
+            background-color: rgba(2, 189, 180, 0.12);
+        }
+
+        .zxc > td {
+            border-radius: 5px;
+        }
+
+        .zxc > td:hover {
+            background-color: rgba(40, 56, 189, 0.12);
+        }
+
+    </style>
+</head>
+<body th:align="center">
+<h1>게시글 목록</h1>
+<table style="border-bottom: #2a2a2b solid 1px" th:align="center" th:cellpadding="0" th:cellsapcing="0"
+       th:width="1000px">
+    <tr class="asd">
+        <td style="width: 30px">No.</td>
+        <td style="width: 80px">카테고리</td>
+        <td style="width: 300px">제목</td>
+        <td style="width: 80px">작성자</td>
+        <td style="width: 50px">등록일</td>
+        <td style="width: 50px">조회수</td>
+    </tr>
+
+    <tr class="zxc" th:each="board : ${boardList}">
+        <td th:text="${board.KeyValue}"></td>
+        <td th:text="${board.category}"></td>
+        <td><a style="display: block;  text-decoration: none; text-align: left; margin-left: 10px"
+               th:href="@{/getboard(KeyValue=${board.keyValue}, linked=false)}"
+               th:text="${board.title}"></a></td>
+        <td th:text="${board.writer}"></td>
+        <td th:text="${#dates.format(board.createDate, 'yyyy-MM-dd')}"></td>
+        <td th:text="${board.cnt}"></td>
+    </tr>
+</table>
+
+<br>
+
+<a style="float:right;
+margin-right: 400px;
+color: aliceblue;
+background-color: #52909c;
+display: block;
+padding: 3px;
+border-radius: 5px;
+text-decoration: none" th:href="@{/insertboard}">글쓰기</a>
+
+<br>
+<br>
+
+<form th:align="center" th:action="searchboard">
+    <select name="category">
+        <option th:value="전체" th:text="전체"></option>
+        <option th:each="String: ${categorylist}" th:value="${String}" th:text="${String}"></option>
+    </select>
+    <input type="text" name="titlesearch" size="20">
+    <input type="submit" value="검색">
+</form>
+
+<br>
+<a style="color: aliceblue;
+text-decoration: none;
+background-color: #52909c;
+padding: 3px;
+border-radius: 5px;" th:href="@{/getBoardList}">리셋</a>
+<br>
+
+<form style="margin-top: 10px">
+    <table th:align="center">
+        <tr>
+            <th style="color: aliceblue;
+background-color: #52909c;
+padding: 3px;
+border-radius: 5px;">방문한 페이지
+            </th>
+        </tr>
+        <tr th:each="a:${visit}">
+            <td><a th:href="@{/getboard(KeyValue=${a.getKeyValue()}, linked=true)}" th:text="${a.getTitle()}"></a></td>
+        </tr>
+    </table>
+</form>
+
+</body>
+</html>

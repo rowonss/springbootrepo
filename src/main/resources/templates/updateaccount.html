@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form th:action="@{/updateaccount(seq=${member.seq})}" method="post">
+    <table th:align="center">
+        <tr>
+            <th>ID</th>
+            <th>PASSWORD</th>
+            <th>e-mail</th>
+            <th>가입일자</th>
+        </tr>
+        <tr>
+            <td><input name="id" type="text" th:value="${member.id}"></td>
+            <td><input name="password" type="text" th:value="${member.password}"></td>
+            <td><input name="email" type="email" th:value="${member.email}"></td>
+            <td th:text="${member.createDate}"></td>
+        </tr>
+        <tr>
+            <td colspan="3"><input type="submit" th:value="수정확인"></td>
+        </tr>
+    </table>
+</form>
+
+
+
+</body>
+</html>

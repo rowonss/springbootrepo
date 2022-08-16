@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1 th:align="center">게시글 수정하기</h1>
+<form th:align="center" th:action="@{/update(KeyValue=${KeyValue})}" method="post">
+    <textarea name="content" th:text="${content}" cols="50" rows="10"></textarea>
+    <input type="submit" value="수정하기" >
+</form>
+
+</body>
+</html>

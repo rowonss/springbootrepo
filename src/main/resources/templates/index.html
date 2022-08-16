@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="https://rowonss.com/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fe07df9a2-02d3-42c3-9cc9-9ad698bcefe3%2Ffavicon.ico?table=block&id=44eb9315-9591-422b-930c-3b6c7b360052&spaceId=a3dc1045-62e7-400c-92b3-47e87f6351af&userId=&cache=v2">
+    <title>Title</title>
+</head>
+<body>
+hello world
+<a href="/hello">hello!</a>
+<a href="/test">test!</a>
+<a href="/account">account!</a>
+<a href="/insertaccount">insertaccount</a>
+<a href="/getaccountlist">getaccountlist</a>
+<a href="/getBoardList">boardList</a>
+<a href="https://naver.com">naver</a>
+<a href="https://naver.com">naver</a>
+<hr>
+<!----------------->
+    <p th:text="${msg}"></p>
+    <hr>
+    Slime Game
+    <hr>
+    <h1>회원가입</h1>
+    <form method="POST" action="/account">
+        <!------input태그의 id1변수이름으로 데이터를 서버에 전달하고------>
+    <!------서버 model에서 받아온 id2변수이름으로 데이터를 html에 출력------>
+    <input type="text" name="id1" th:value="${id2}" />
+    <input type="submit" value="Click" />
+</form>
+
+</body>
+</html>
