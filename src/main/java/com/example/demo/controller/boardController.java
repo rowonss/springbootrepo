@@ -72,6 +72,7 @@ public class boardController {
         comment.setName(name);
         comment.setPassword(password);
         comment_array.add(comment);
+        System.out.println();
 
         String referer = request.getHeader("Referer");
         return "redirect:" + referer;
