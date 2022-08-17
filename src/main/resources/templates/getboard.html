@@ -35,37 +35,32 @@
     </tr>
 </table>
 <a th:href="@{/getBoardList}">글목록</a>
-<a th:href="@{/deleteboard(KeyValue=${board.KeyValue})}">글삭제</a>
-<a th:href="@{/updateboard(content=${board.content}, KeyValue=${board.KeyValue})}">글수정</a>
+<a th:href="@{/deleteboard(KeyValue=${board.keyValue})}">글삭제</a>
+<a th:href="@{/updateboard(content=${board.content}, KeyValue=${board.keyValue})}">글수정</a>
 
-<!--<form th:align="center">-->
-<!--    <table th:align="center">-->
-<!--        <tr>-->
-<!--            <th bgcolor="orange" width="150">작성자</th>-->
-<!--            <th bgcolor="orange" width="200">내용</th>-->
-<!--        </tr>-->
-<!--        <tr th:each="comment:${commentList}">-->
-<!--            <td th:text="${comment.name}"></td>-->
-<!--            <td th:text="${comment.comments}"></td>-->
-<!--        </tr>-->
-<!--    </table>-->
-<!--</form>-->
+<form th:align="center">
+    <table th:align="center">
+        <tr>
+            <th bgcolor="orange" width="150">작성자</th>
+            <th bgcolor="orange" width="200">내용</th>
+        </tr>
+        <tr th:each="comment:${commentList}">
+            <td th:text="${comment.name}"></td>
+            <td th:text="${comment.comments}"></td>
+        </tr>
+    </table>
+</form>
 
 
-<!--<form th:action="@{/boardcomment(KeyValue=${board.KeyValue})}" method="post" th:align="center">-->
-<!--    <table th:align="center" border="1" th:cellpadding="0" th:cellspacing="0">-->
-<!--        <tr>-->
-<!--            <td bgcolor="orange" th:text="작성자" width="80"></td>-->
-<!--            <td><input name="name" type="text" size="10"></td>-->
-<!--            <td rowspan="2"><textarea name="comments" cols="70" rows="5"></textarea></td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--            <td bgcolor="orange" th:text="비밀번호" width="80"></td>-->
-<!--            <td><input name="password" type="text" size="10"></td>-->
-<!--            <td></td>-->
-<!--        </tr>-->
-<!--    </table>-->
-<!--&lt;!&ndash;    <input th:align="center" type="submit" value="댓글 등록">&ndash;&gt;-->
-<!--</form>-->
+<form th:action="@{/boardcomment(KeyValue=${board.keyValue})}" method="post" th:align="center">
+    <table th:align="center" border="1" th:cellpadding="0" th:cellspacing="0">
+        <tr>
+            <td bgcolor="orange" th:text="작성자" width="80"></td>
+            <td><input name="name" type="text" size="10"></td>
+            <td rowspan="2"><textarea name="comments" cols="70" rows="5"></textarea></td>
+        </tr>
+    </table>
+    <input th:align="center" type="submit" value="댓글 등록">
+</form>
 </body>
 </html>

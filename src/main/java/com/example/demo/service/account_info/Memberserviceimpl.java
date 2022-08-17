@@ -20,6 +20,27 @@ public class Memberserviceimpl implements Memberservice{
     }
 
     @Override
+    public List<Member> getMemberListWhereEmailLike(String Email) {
+
+        List<Member> members = memberRepo.findMemberByEmailContaining(Email);
+
+        for(int i=0; i<members.size();i++){
+            StringBuilder a = new StringBuilder();
+            for(int j=0; j<members.get(i).getEmail().length(); j++){
+                if(j>2){
+                    a.append("*");
+                }
+                else {
+                    a.append(members.get(i).getEmail().charAt(j));
+                }
+            }
+            members.get(i).setEmail(String.valueOf(a));
+        }
+
+        return memberRepo.findMemberByEmailContaining(Email);
+    }
+
+    @Override
     public List<Member> getMemberList() {
         return (List<Member>) memberRepo.findAll();
     }

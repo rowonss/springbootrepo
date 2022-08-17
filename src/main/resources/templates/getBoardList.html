@@ -46,7 +46,7 @@
     </tr>
 
     <tr class="zxc" th:each="board : ${boardList}">
-        <td th:text="${board.KeyValue}"></td>
+        <td th:text="${board.keyValue}"></td>
         <td th:text="${board.category}"></td>
         <td><a style="display: block;  text-decoration: none; text-align: left; margin-left: 10px"
                th:href="@{/getboard(KeyValue=${board.keyValue}, linked=false)}"

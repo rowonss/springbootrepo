@@ -13,7 +13,9 @@ import java.util.Enumeration;
 
 import com.example.demo.model.board;
 import com.example.demo.model.comment;
+import com.example.demo.service.account_info.Memberservice;
 import com.example.demo.service.boardservice;
+import com.example.demo.service.commentservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +30,9 @@ public class boardController {
 
     @Autowired
     private boardservice boardservice;
+
+    @Autowired
+    private commentservice commentservice;
     static String[] category_list = {"자유", "게임", "만화", "차량"};
     static ArrayList<comment> comment_array = new ArrayList<comment>();
     static ArrayList<board> board_array = new ArrayList<board>();
@@ -59,29 +64,19 @@ public class boardController {
     @PostMapping("boardcomment")
     public String boardcomment(
             HttpServletRequest request,
-            @RequestParam("KeyValue") int KeyValue,
-            @RequestParam("name") String name,
-            @RequestParam("comments") String comments,
-            @RequestParam("password") String password
+            comment comment
     ) {
-        comment comment = new comment();
-        comment.setKeyValue(KeyValue);
-        comment.setComments(comments);
-        comment.setSeq(commentKey);
-        commentKey++;
-        comment.setName(name);
-        comment.setPassword(password);
-        comment_array.add(comment);
-        System.out.println();
-
+        commentservice.insertcomment(comment);
         String referer = request.getHeader("Referer");
         return "redirect:" + referer;
-
     }
 
     @RequestMapping("getboard")
     public String getboard(@RequestParam boolean linked, board board, Model model) {
         boardservice.boardcounter(board);
+        List<comment> comments =  commentservice.getcommentlist();
+        List<comment> thiscomments = new ArrayList<>();
+
         board thisboard = boardservice.getboard(board);
         if (!linked && !alreadycheck.contains(thisboard.getKeyValue())) {
             visitedpage.offer(thisboard);
@@ -91,6 +86,13 @@ public class boardController {
                 alreadycheck.poll();
             }
         }
+
+        for(int i=0; i<comments.size(); i++){
+            if(comments.get(i).getKeyValue() == thisboard.getKeyValue())
+                thiscomments.add(comments.get(i));
+        }
+
+        model.addAttribute("commentList", thiscomments);
         model.addAttribute("board", boardservice.getboard(board));
         return "getboard";
     }

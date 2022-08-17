@@ -8,6 +8,8 @@ public interface Memberservice {
 
     List<Member> getMemeberWhereIdOrEmail(String Email, String Id);
 
+    List<Member> getMemberListWhereEmailLike(String Email);
+
     List<Member> getMemberList();
 
     void insertMember(Member member);

@@ -30,13 +30,9 @@ public class membercontroller {
     @PostMapping("insertaccount")
     public String insertaccount(Member member){
 
-        System.out.println(member.toString());
-
         member.setCreateDate(new Date());
         member.setUpdateDate(new Date());
         memberservice.insertMember(member);
-
-
 
         return "index";
     }
@@ -72,4 +68,17 @@ public class membercontroller {
 
         return "redirect:getaccountlist";
     }
+
+    @GetMapping("selectaccount")
+    public String selectaccount (){
+        return "selectaccount";
+    }
+
+    @PostMapping("selectaccount")
+    public String result (Member member, Model model){
+        model.addAttribute("memberlist",memberservice.getMemberListWhereEmailLike(member.getEmail()));
+        return "resultaccount";
+    }
+
+
 }
