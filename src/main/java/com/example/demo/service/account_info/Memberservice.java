@@ -10,6 +10,8 @@ public interface Memberservice {
 
     List<Member> getMemberListWhereEmailLike(String Email);
 
+    Member findMemberByIdAndPassword(String id, String password);
+
     List<Member> getMemberList();
 
     void insertMember(Member member);

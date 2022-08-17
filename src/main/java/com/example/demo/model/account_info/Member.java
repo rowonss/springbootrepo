@@ -19,6 +19,7 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
 
+
     @Id
     @GeneratedValue
     private Long seq;

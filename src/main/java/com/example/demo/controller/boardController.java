@@ -11,12 +11,17 @@ import javax.servlet.http.*;
 import java.util.*;
 import java.util.Enumeration;
 
+import com.example.demo.model.account_info.Member;
 import com.example.demo.model.board;
 import com.example.demo.model.comment;
+import com.example.demo.persistence.account_info.MemberRepository;
 import com.example.demo.service.account_info.Memberservice;
 import com.example.demo.service.boardservice;
 import com.example.demo.service.commentservice;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,11 +37,16 @@ public class boardController {
     private boardservice boardservice;
 
     @Autowired
+    private Memberservice memberservice;
+    @Autowired
     private commentservice commentservice;
     static String[] category_list = {"자유", "게임", "만화", "차량"};
     static ArrayList<comment> comment_array = new ArrayList<comment>();
     static ArrayList<board> board_array = new ArrayList<board>();
+
+    static Member loginuser = null;
     static int commentKey = 0;
+
 
     static Queue<board> visitedpage = new LinkedList();
     static Queue<Integer> alreadycheck = new LinkedList<>();
@@ -45,12 +55,27 @@ public class boardController {
     //리퀘스트파람 : 클라이언트에서 스트링 문자열을 서버에 전달하는 매개변수 선언
 
     @GetMapping("index")
-    public String index(){
+    public String index(Model model){
         return "index";
     }
 
+    @RequestMapping("login")
+    public String login (@RequestParam ("id") String id,
+                         @RequestParam ("password") String password){
+        loginuser = memberservice.findMemberByIdAndPassword(id,password);;
+        System.out.println("로그인");
+        return "redirect:index";
+    }
+
+    @RequestMapping("logout")
+    public String logout (){
+        loginuser = null;
+        return "redirect:index";
+    }
+
     @GetMapping("insertboard")
-    public String insertBoard() {
+    public String insertBoard(Model model) {
+        model.addAttribute("loginuser",loginuser);
         return "insertboard";
     }
 
@@ -104,10 +129,37 @@ public class boardController {
     }
 
     @RequestMapping("/getBoardList")
-    public String getBoardList(Model model) {
+    public String getbo(Model model, @PageableDefault(size = 5, sort = "createDate", direction = Sort.Direction.DESC)Pageable pageable){
+        if(loginuser == null){
+            return "redirect:index";
+        }
+        model.addAttribute("loginuser",loginuser);
         model.addAttribute("visit", visitedpage);
         model.addAttribute("categorylist", category_list);
-        model.addAttribute("boardList", boardservice.getboardlist());
+        model.addAttribute("boardList", boardservice.list(pageable));
+        return "getBoardList";
+    }
+
+//    @RequestMapping("/getBoardList")
+//    public String getBoardList(Model model) {
+//        if(loginuser == null){
+//            return "redirect:index";
+//        }
+//        model.addAttribute("loginuser",loginuser);
+//        model.addAttribute("visit", visitedpage);
+//        model.addAttribute("categorylist", category_list);
+//        model.addAttribute("boardList", boardservice.getboardlist());
+//        return "getBoardList";
+//    }
+
+    @RequestMapping("/findboardlist")
+    public String findboardlist(Model model,
+    @RequestParam ("writer") String writer) {
+
+        model.addAttribute("loginuser",loginuser);
+        model.addAttribute("visit", visitedpage);
+        model.addAttribute("categorylist", category_list);
+        model.addAttribute("boardList", boardservice.findboardbywriter(writer));
         return "getBoardList";
     }
 

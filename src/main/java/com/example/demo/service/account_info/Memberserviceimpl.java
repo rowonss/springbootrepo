@@ -41,6 +41,11 @@ public class Memberserviceimpl implements Memberservice{
     }
 
     @Override
+    public Member findMemberByIdAndPassword(String id, String password) {
+        return memberRepo.findMemberByIdAndPassword(id,password);
+    }
+
+    @Override
     public List<Member> getMemberList() {
         return (List<Member>) memberRepo.findAll();
     }

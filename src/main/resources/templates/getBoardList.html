@@ -51,11 +51,16 @@
         <td><a style="display: block;  text-decoration: none; text-align: left; margin-left: 10px"
                th:href="@{/getboard(KeyValue=${board.keyValue}, linked=false)}"
                th:text="${board.title}"></a></td>
-        <td th:text="${board.writer}"></td>
+        <td><a style="display: block;  text-decoration: none; text-align: left; margin-left: 10px"
+               th:href="@{/findboardlist(writer=${board.writer})}"
+               th:text="${board.writer}"></a></td>
         <td th:text="${#dates.format(board.createDate, 'yyyy-MM-dd')}"></td>
         <td th:text="${board.cnt}"></td>
     </tr>
 </table>
+
+<a th:href="${}" th:text="'<<'"></a>
+
 
 <br>
 
@@ -66,7 +71,7 @@ background-color: #52909c;
 display: block;
 padding: 3px;
 border-radius: 5px;
-text-decoration: none" th:href="@{/insertboard}">글쓰기</a>
+text-decoration: none" th:href="@{/insertboard(loginuser=${loginuser})}">글쓰기</a>
 
 <br>
 <br>
@@ -102,6 +107,6 @@ border-radius: 5px;">방문한 페이지
         </tr>
     </table>
 </form>
-
+<p th:align="center" th:text="${loginuser.getId()}"></p>
 </body>
 </html>

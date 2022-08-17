@@ -12,6 +12,8 @@ public interface MemberRepository extends CrudRepository <Member, Long> {
 
     List<Member> findMemberByEmailContaining (String Email);
 
+    Member findMemberByIdAndPassword(String id, String password);
+
     Member findFirstById(String Id);
 
 }

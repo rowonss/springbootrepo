@@ -12,14 +12,14 @@
             <th th:text="번호"></th>
             <th th:text="멤버ID"></th>
             <th th:text="e-mail"></th>
-            <th th:text="정보수정"></th>
+            <th th:text="정보"></th>
             <th th:text="비고"></th>
         </tr>
         <tr th:each="member:${memberlist}">
             <td th:text="${member.seq}"></td>
             <td th:text="${member.id}"></td>
             <td th:text="${member.email}"></td>
-            <td><a th:href="@{/updateaccount(seq=${member.seq})}" th:text="수정"></a></td>
+            <td><a th:href="@{/updateaccount(seq=${member.seq})}" th:text="정보"></a></td>
             <td><a th:href="@{/deleteaccount(seq=${member.seq})}" th:text="삭제"></a></td>
         </tr>
     </table>

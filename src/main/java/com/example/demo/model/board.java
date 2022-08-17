@@ -43,7 +43,7 @@ public class board {
     @Column(length = 10)
     private String category;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createDate;
 
     @ColumnDefault("0")

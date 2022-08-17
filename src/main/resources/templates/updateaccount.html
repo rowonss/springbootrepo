@@ -26,6 +26,31 @@
     </table>
 </form>
 
+<form>
+    <table th:align="center">
+        <tr>
+            <td style="width: 30px">No.</td>
+            <td style="width: 80px">카테고리</td>
+            <td style="width: 300px">제목</td>
+            <td style="width: 80px">작성자</td>
+            <td style="width: 50px">등록일</td>
+            <td style="width: 50px">조회수</td>
+        </tr>
+        <tr th:each="board:${boardlist}">
+            <td th:text="${board.keyValue}"></td>
+            <td th:text="${board.category}"></td>
+            <td><a style="display: block;  text-decoration: none; text-align: left; margin-left: 10px"
+                   th:href="@{/getboard(KeyValue=${board.keyValue}, linked=false)}"
+                   th:text="${board.title}"></a></td>
+            <td><a style="display: block;  text-decoration: none; text-align: left; margin-left: 10px"
+                   th:href="@{/findboardlist(writer=${board.writer})}"
+                   th:text="${board.writer}"></a></td>
+            <td th:text="${#dates.format(board.createDate, 'yyyy-MM-dd')}"></td>
+            <td th:text="${board.cnt}"></td>
+        </tr>
+    </table>
+</form>
+
 
 
 </body>
