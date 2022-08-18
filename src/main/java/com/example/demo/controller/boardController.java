@@ -137,6 +137,7 @@ public class boardController {
         model.addAttribute("visit", visitedpage);
         model.addAttribute("categorylist", category_list);
         model.addAttribute("boardList", boardservice.list(pageable));
+
         return "getBoardList";
     }
 

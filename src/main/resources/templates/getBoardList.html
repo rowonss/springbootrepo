@@ -59,10 +59,16 @@
     </tr>
 </table>
 
-<a th:href="${}" th:text="'<<'"></a>
-
+<form th:align="center">
+<div th:each="m:${#numbers.sequence(0,2)}">
+    <ul style="list-style: none; float: left">
+        <li><a th:href="@{/getBoardList(page=${m})}" th:text="${m}"></a></li>
+    </ul>
+</div>
+</form>
 
 <br>
+
 
 <a style="float:right;
 margin-right: 400px;

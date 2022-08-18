@@ -2,6 +2,7 @@ package com.example.demo.model;
 
 import java.util.Date;
 
+import com.example.demo.model.base.baseTimeEntity;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
@@ -19,7 +20,7 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @Setter
 
-public class comment {
+public class comment extends baseTimeEntity {
 
     @Id @GeneratedValue
     private int seq;

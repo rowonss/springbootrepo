@@ -68,9 +68,18 @@ public class membercontroller {
 
         Member thismember = memberservice.getMember(member);
         String writer = thismember.getId();
+        List<board> threelist = new ArrayList<>();
 
         List<board> boardlist = boardservice.findorderbykey(writer);
-        model.addAttribute("boardlist", boardlist);
+        if(boardlist.size()>2){
+            threelist.add(boardlist.get(0));
+            threelist.add(boardlist.get(1));
+            threelist.add(boardlist.get(2));
+            model.addAttribute("boardlist", threelist);
+        }
+        else {
+            model.addAttribute("boardlist", boardlist);
+        }
         model.addAttribute(memberservice.getMember(member));
 
         return "updateaccount";

@@ -42,9 +42,7 @@
             <td><a style="display: block;  text-decoration: none; text-align: left; margin-left: 10px"
                    th:href="@{/getboard(KeyValue=${board.keyValue}, linked=false)}"
                    th:text="${board.title}"></a></td>
-            <td><a style="display: block;  text-decoration: none; text-align: left; margin-left: 10px"
-                   th:href="@{/findboardlist(writer=${board.writer})}"
-                   th:text="${board.writer}"></a></td>
+            <td th:text="${board.writer}"></td>
             <td th:text="${#dates.format(board.createDate, 'yyyy-MM-dd')}"></td>
             <td th:text="${board.cnt}"></td>
         </tr>
